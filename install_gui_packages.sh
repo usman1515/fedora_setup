@@ -26,14 +26,14 @@ sudo dnf install -y meld
 echo -e "${YELLOW} PDF readers ${NC}"
 sudo dnf install -y zathura zathura-pdf-mupdf zathura-cb zathura-djvu zathura-ps
 sudo dnf install -y xreader
-# sudo dnf install -y okular
+sudo dnf install -y okular
 
 # ----------------------------- Email and chat clients
 echo -e "${YELLOW} Email and chat clients ${NC}"
 # sudo dnf install -y steam
 sudo dnf install -y discord
 # install zoom
-wget -P ~/Downloads https://zoom.us/client/5.15.2.4260/zoom_x86_64.rpm
+wget -P ~/Downloads https://cdn.zoom.us/prod/7.1.5.4332/zoom_x86_64.rpm
 sudo dnf install -y ~/Downloads/zoom_x86_64.rpm
 # install slack
 # wget -P ~/Downloads https://downloads.slack-edge.com/releases/linux/4.32.127/prod/x64/slack-4.32.127-0.1.el8.x86_64.rpm
@@ -61,7 +61,7 @@ sudo dnf install -y ~/Downloads/VNC-Viewer-7.5.1-Linux-x64.rpm
 
 # ----------------------------- Torrent clients
 echo -e "${YELLOW} Torrent clients ${NC}"
-# sudo dnf install -y qbittorrent
+sudo dnf install -y qbittorrent
 
 # ----------------------------- Virtual Emulators
 echo -e "${YELLOW} Virtual Emulators ${NC}"
@@ -70,7 +70,7 @@ sudo dnf install -y virt-manager
 
 # ----------------------------- Web browsers
 echo -e "${YELLOW} Web browsers ${NC}"
-sudo dnf install -y chromium
+# sudo dnf install -y chromium
 
 # install librewolf
 curl -fsSL https://repo.librewolf.net/librewolf.repo | pkexec tee /etc/yum.repos.d/librewolf.repo
@@ -89,8 +89,9 @@ sudo dnf install -y gtkwave
 wget -P ~/Downloads https://github.com/balena-io/etcher/releases/download/v1.18.8/balena-etcher-1.18.8.x86_64.rpm
 sudo dnf install -y ~/Downloads/balena-etcher-1.18.8.x86_64.rpm
 # install key pass XC
-sudo dnf install -y keepassxc
+# sudo dnf install -y keepassxc
 # install joplin
+sudo dnf install -y fuse-libs
 wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash
 
 # ----------------------------- Media
@@ -100,21 +101,23 @@ sudo dnf install -y vlc
 
 
 
-# ==================== Install using Flatpak
-echo -e "${YELLOW} Install using Flatpak ${NC}"
+# ==================== install using Flatpak
+echo -e "${YELLOW} install using Flatpak ${NC}"
 
 # install flatpak
-sudo dnf install flatpak
+sudo dnf install -y flatpak
 
 # add remote repo flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
+# install zen browser
+flatpak install flathub app.zen_browser.zen
 # install spotify
 sudo flatpak install flathub -y com.spotify.Client
 # install spotube
 # sudo flatpak install com.github.KRTirtho.Spotube
 # install whatsapp
-sudo flatpak install flathub -y com.github.eneshecan.WhatsAppForLinux
+sudo flatpak install flathub com.rtosta.zapzap
 # install pdf editor
 sudo flatpak install flathub -y com.github.jeromerobert.pdfarranger
 # install bambulab studio
@@ -125,5 +128,6 @@ flatpak install flathub org.zotero.Zotero
 flatpak install flathub com.jgraph.drawio.desktop
 
 # list all flatpak packages installed
-flatpak list
-
+flatpak list --app
+# uninstall unused packages
+flatpak uninstall --unused
