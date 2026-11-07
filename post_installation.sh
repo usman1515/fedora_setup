@@ -11,7 +11,7 @@ echo -e "${YELLOW} enable access to both the free and the nonfree repositories $
 sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 echo -e "${YELLOW} explicitly enable the repository ${NC}"
-sudo dnf config-manager --enable fedora-cisco-openh264
+sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
 
 echo -e "${YELLOW} update all packagges in core group ${NC}"
 sudo dnf groupupdate core
