@@ -243,15 +243,83 @@ verible-verilog-ls --version
 verible-verilog-syntax --version
 ```
 
-### 9.2 Install other FOSS EDA tools.
-- If you want to build the following tools from source use the following scripts.
--   [GHDL](https://github.com/ghdl/ghdl) for VHDL simulation.
--   [NVC](https://github.com/nickg/nvc) for VHDL simulation.
--   [iVerilog](https://github.com/steveicarus/iverilog) for Verilog simulation.
--   [Yosys](https://github.com/YosysHQ/yosys) for Verilog synthesis.
--   [Verilator](https://github.com/verilator/verilator) for converting Verilog and SystemVerilog designs into a C++ or SystemC model.
--   [Chisel](https://github.com/chipsalliance/chisel) for designing and testing RTL using Chisel/Scala.
--   [FloPoCo](https://flopoco.org/) for generating Floating Point Cores.
+### Install AMD Vivado + Vitis
+We are using AMD Vivado as our primary tool for FPGA project development. Ask one of the team
+members for the setup. At the time of writing this tutorial we are using version 2025.1.
+
+```bash
+sudo dnf install -y git gcc g++ make autoconf automake cmake python3 ncurses-compat-libs \
+    commons-compiler-jdk.noarch java-25-openjdk.x86_64 java-latest-openjdk.x86_64
+```
+- Update your system
+```bash
+sudo dnf -y update
+```
+- Now open the setup folder and look for the following file and run the command below.
+```bash
+chmod +x ./FPGAs_AdaptiveSoCs_Unified_2024.1_0522_2023_Lin64.bin
+```
+- Run the setup file.
+```bash
+sudo ./FPGAs_AdaptiveSoCs_Unified_2024.1_0522_2023_Lin64.bin
+```
+- An installation window opens up.
+- Select the product to install: **Vitis**.
+4. Accept all license agreements.
+5. Select the destination directory: `/tools/Xilinx/`.
+    - Allow it to create the directories if they don’t exist.
+6. Click **Install**.
+
+Grab a cup of coffee , sit back and relax. This a gonna take a while depending on your internet
+connection.
+
+#### Install Cable Drivers (Linux Only)
+Once vivado is installed you need to setup the cable drivers and board definitions.
+```bash
+# go to directory
+cd /tools/Xilinx/2025.1/Vivado/data/xicom/cable_drivers/lin64/install_script/install_drivers/
+
+# run script
+sudo ./install_drivers
+```
+
+#### Install Digilent's Board Files
+Once you have installed the cable drivers we need to setup the board definitions.
+```bash
+mkdir -p ~/Tools/
+cd ~/Tools/
+
+# clone the repo
+git clone https://github.com/Digilent/vivado-boards.git
+cd vivado-boards
+
+# copy board files
+sudo cp -rv ~/Tools/vivado-boards/new/board_files /tools/Xilinx/2025.1/Vivado/data/boards/
+```
+
+#### Download Digilent Boards Constraint Files
+Simply cloen this repo as it provides the IO constraint files for multiple Digilent boards. What
+these are and how they work will be explained further down the bootcamp.
+
+```bash
+mkdir -p ~/Tools/
+cd ~/Tools/
+
+# clone the repo
+git clone https://github.com/Digilent/digilent-xdc.git vivado_digilent_xdc_files
+cd vivado_digilent_xdc_files
+```
+
+#### How to Run Vivado
+Run the following command in your terminal every time you want to start Vivado.
+
+```bash
+# source run script
+source /tools/Xilinx/2025.1/Vivado/settings64.sh
+
+# run vivado
+vivado &
+```
 
     ```bash
     source install_ghdl.sh
