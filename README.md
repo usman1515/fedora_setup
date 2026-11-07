@@ -345,6 +345,34 @@ verilator --version
 ```
 
 ### Install Platform IO
+```bash
+# install dependencies
+sudo dnf install -y python3 python3-pip git curl
+
+# install platformio
+curl -fsSL -o get-platformio.py https://raw.githubusercontent.com/platformio/platformio-core-installer/master/get-platformio.py
+python3 get-platformio.py
+
+# This creates an isolated environment in ~/.platformio/penv.
+ls $HOME/.platformio/
+
+# Then add it to your PATH in .bashrc or .zshrc
+export PATH="$HOME/.platformio/penv/bin:$PATH"
+
+platformio --version
+```
+
+#### Install udev rules (so you can flash without sudo)
+```bash
+curl -fsSL https://raw.githubusercontent.com/platformio/platformio-core/develop/platformio/assets/system/99-platformio-udev.rules | sudo tee /etc/udev/rules.d/99-platformio-udev.rules
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+
+# Then add yourself to the serial-port group. On Fedora that’s dialout (and sometimes uucp):
+sudo usermod -aG dialout,uucp $USER
+```
+
+Log out and back in for this to take effect.
 
 ### Install RISC V GNU toolchains
 
