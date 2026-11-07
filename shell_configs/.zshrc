@@ -9,6 +9,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="agnoster"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -71,6 +72,7 @@ zstyle ':omz:update' frequency 30
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+    autoswitch_virtualenv
     zsh-syntax-highlighting
     zsh-autosuggestions
     git
@@ -80,11 +82,11 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-source ~/.p10k.zsh
+source $HOME/.p10k.zsh
 
 # Check if the zsh_aliases file exists and source it
 if [[ -f ~/.zsh_aliases ]]; then
-    source ~/.zsh_aliases
+    source $HOME/.zsh_aliases
 fi
 
 # User configuration
