@@ -44,7 +44,6 @@ sudo dnf install -y tokei
 # System Monitoring & Network
 sudo dnf install -y btop
 sudo dnf install -y NetworkManager-tui
-sudo dnf install -y qalculate
 
 # Media processing
 sudo dnf install -y ffmpeg
