@@ -217,15 +217,30 @@ simulation and is separate from the OSS CAD Suite.
 source install_nvc.sh
 ```
 
+### Install [Verible](https://github.com/chipsalliance/verible)
+Verible is a suite of SystemVerilog developer tools, including a parser, style-linter, formatter and
+language server. To start download the latest `*-linux-static-x86_64.tar.gz` file from this
+[link](https://github.com/chipsalliance/verible/releases).
+
 ```bash
-# download archive and move here
-wget https://github.com/YosysHQ/oss-cad-suite-build/releases/download/<release-date>/oss-cad-suite-linux-arm64- <release-date>.tgz
+# after downloading the tar file
+mkdir -p ~/Tools/verible
+cd ~/Tools/verible
 
-# extract archive
-tar -zxvf oss-cad-suite-linux-arm64-<release-date>.tgz -C ~/Tools
+tar -zxvf ~/Downloads/verible-v0.0-4148-g1ea007ec-linux-static-x86_64.tar.gz -C ~/Tools/verible
 
-# rename folder
-mv -v oss-cad-suite oss-cad-suite-<release-date>
+# Add the following `$PATH` in your `~/.bashrc`
+export PATH="$HOME/Tools/verible-v0.0-4148-g1ea007ec/bin:$PATH"
+
+# restart the shell or run:
+source ~/.bashrc
+
+# verify the installation:
+verible-verilog-diff --version
+verible-verilog-format --version
+verible-verilog-lint --version
+verible-verilog-ls --version
+verible-verilog-syntax --version
 ```
 
 ### 9.2 Install other FOSS EDA tools.
