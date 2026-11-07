@@ -1,32 +1,36 @@
 # Fedora Setup
 
 - [Fedora Setup](#fedora-setup)
-    - [Introduction](#introduction)
-    - [1. Download and Install Fedora](#1-download-and-install-fedora)
-    - [2. First things to do post installation](#2-first-things-to-do-post-installation)
-        - [2.1 Connect to your local work/home WiFi](#21-connect-to-your-local-workhome-wifi)
-        - [2.2 Install `git`](#22-install-git)
-        - [2.2 Setup `dnf` configuration](#22-setup-dnf-configuration)
-        - [2.3 Update the system](#23-update-the-system)
-    - [3. Setup the Terminal](#3-setup-the-terminal)
-        - [3.1 Clone the dotfiles repository](#31-clone-the-dotfiles-repository)
-        - [3.2 Install Nerd Fonts](#32-install-nerd-fonts)
-        - [3.3 Install Alacritty](#33-install-alacritty)
-        - [3.4 Install Kitty](#34-install-kitty)
-        - [3.5 Install Tmux](#35-install-tmux)
-        - [3.6 Install NeoVim](#36-install-neovim)
-        - [3.7 Install and customize ZSH](#37-install-and-customize-zsh)
-        - [3.8 (Optional) Install and customize Oh my Posh](#38-optional-install-and-customize-oh-my-posh)
-    -  [4. Install Compilers](#4-install-compilers)
-    -  [5. Install CLI based tools](#5-install-cli-based-tools)
-    -  [6. Install GUI based applications](#6-install-gui-based-applications)
-    -  [7. Install Gtklp for remote printers](#7-install-gtklp-for-remote-printers)
-    -  [8. Setup SSH](#8-setup-ssh)
-    -  [9. Install FOSS toolchains for Hardware development](#9-install-foss-toolchains-for-hardware-development)
-        - [9.1 Install OSS CAD Suite](#91-install-oss-cad-suite)
-        - [9.2 Install other FOSS EDA tools.](#92-install-other-foss-eda-tools)
-    -  [10. Optional: Upgrade Fedora](#10-optional-upgrade-fedora)
-
+  - [Introduction](#introduction)
+  - [Download and Install Fedora](#download-and-install-fedora)
+  - [First things to do post installation](#first-things-to-do-post-installation)
+    - [Install `git`](#install-git)
+    - [Setup `dnf` configuration](#setup-dnf-configuration)
+    - [Update the system](#update-the-system)
+  - [Setup the Terminal](#setup-the-terminal)
+    - [Clone the dotfiles repository.](#clone-the-dotfiles-repository)
+    - [Install Nerd Fonts](#install-nerd-fonts)
+    - [Install Alacritty](#install-alacritty)
+    - [Install Kitty](#install-kitty)
+    - [Install Tmux](#install-tmux)
+    - [Install NeoVim](#install-neovim)
+    - [Install and customize ZSH](#install-and-customize-zsh)
+    - [(Optional) Install and customize Oh my Posh](#optional-install-and-customize-oh-my-posh)
+  - [Install Compilers](#install-compilers)
+  - [Install CLI based tools](#install-cli-based-tools)
+  - [Install GUI based applications](#install-gui-based-applications)
+  - [Install FOSS toolchains for Hardware development](#install-foss-toolchains-for-hardware-development)
+    - [Install OSS CAD Suite](#install-oss-cad-suite)
+    - [Install NVC](#install-nvc)
+    - [Install Verible](#install-verible)
+    - [Install AMD Vivado + Vitis](#install-amd-vivado--vitis)
+      - [Install Cable Drivers (Linux Only)](#install-cable-drivers-linux-only)
+      - [Install Digilent's Board Files](#install-digilents-board-files)
+      - [Download Digilent Boards Constraint Files](#download-digilent-boards-constraint-files)
+      - [How to Run Vivado](#how-to-run-vivado)
+    - [Install Chisel](#install-chisel)
+    - [Install Platform IO](#install-platform-io)
+    - [Install RISC V GNT toolchains](#install-risc-v-gnt-toolchains)
 
 ## Introduction
 This repo is a guide to how I setup my desktop machine using Fedora with the Sway TWM as my distro
@@ -321,19 +325,34 @@ source /tools/Xilinx/2025.1/Vivado/settings64.sh
 vivado &
 ```
 
-    ```bash
-    source install_ghdl.sh
-    source install_nvc.sh
-    source install_iverilog.sh
-    source install_yosys.sh
-    source install_verilator.sh
-    source install_chisel.sh
-    source install_docker_flopoco.sh
-    ```
+### Install Chisel
+Chisel (Constructing Hardware In a Scala Embedded Language) is a hardware construction language
+embedded in the high-level programming language Scala. Chisel is a library of special class
+definitions, predefined objects, and usage conventions within Scala, so when you write Chisel you
+are actually writing a Scala program that constructs a hardware graph. Chisel is a Scala library and
+compiler plugin.
 
-## 10. Optional: Upgrade Fedora
--   To upgrade fedora run the following script
-    ```bash
-    source upgrade_fedora.sh
-    ```
+```bash
+# install java
+sudo dnf install -y java-21-openjdk-devel
+java -version
 
+# install sbt
+curl -s -L https://github.com/sbt/sbt/releases/download/v1.9.7/sbt-1.9.7.tgz | tar xvz
+
+#cehck if verilator is insatlled
+verilator --version
+```
+
+### Install Platform IO
+
+### Install RISC V GNU toolchains
+
+
+
+
+
+
+
+
+[def]: #1-download-and-install-fedora
