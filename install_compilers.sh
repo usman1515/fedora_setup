@@ -16,7 +16,11 @@ sudo dnf install -y lua
 # install java
 sudo dnf install -y java-openjdk
 # install rust
-sudo dnf install -y rust cargo
+sudo dnf install -y rustup
+rustup-init
+# install typst
+sudo dnf copr enable claaj/typst
+sudo dnf install -y typst
 # install latex
 sudo dnf install -y texlive-scheme-full
 # install nodejs

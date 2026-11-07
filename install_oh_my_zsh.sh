@@ -12,6 +12,7 @@ echo -e "${YELLOW} install ZSH and CHSH ${NC}"
 sudo dnf install -y zsh
 # install chsh
 sudo dnf install -y util-linux
+sudo dnf install -y eza
 
 # download oh my zsh
 echo -e "${YELLOW} download oh my ZSH ${NC}"
@@ -24,7 +25,7 @@ echo -e "${YELLOW} download zsh-autosuggestions ${NC}"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 echo -e "${YELLOW} download zsh-autoswitch-virtualenv ${NC}"
-git clone "https://github.com/MichaelAquilina/zsh-autoswitch-virtualenv.git" "$ZSH_CUSTOM/plugins/autoswitch_virtualenv"
+git clone https://github.com/MichaelAquilina/zsh-autoswitch-virtualenv.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/autoswitch_virtualenv
 
 echo -e "${YELLOW} download powerlevel 10k ${NC}"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k

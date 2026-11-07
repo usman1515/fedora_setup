@@ -1,50 +1,50 @@
 #!/bin/bash
 
 # python
-code --install-extension ms-python.python
-code --install-extension ms-python.vscode-pylance
-code --install-extension ms-toolsai.jupyter
-code --install-extension ms-toolsai.jupyter-renderers
-code --install-extension ms-toolsai.jupyter-keymap
-code --install-extension kevinrose.vsc-python-indent
-code --install-extension njpwerner.autodocstring
-code --install-extension oderwat.indent-rainbow
+flatpak run com.visualstudio.code --install-extension ms-python.python
+flatpak run com.visualstudio.code --install-extension ms-python.vsflatpak run com.visualstudio.code-pylance
+flatpak run com.visualstudio.code --install-extension ms-toolsai.jupyter
+flatpak run com.visualstudio.code --install-extension ms-toolsai.jupyter-renderers
+flatpak run com.visualstudio.code --install-extension ms-toolsai.jupyter-keymap
+flatpak run com.visualstudio.code --install-extension kevinrose.vsc-python-indent
+flatpak run com.visualstudio.code --install-extension njpwerner.autodocstring
+flatpak run com.visualstudio.code --install-extension oderwat.indent-rainbow
 
 # c/c++
-code --install-extension ms-vscode.cpptools
-code --install-extension jeff-hykin.better-cpp-syntax
+flatpak run com.visualstudio.code --install-extension ms-vsflatpak run com.visualstudio.code.cpptools
+flatpak run com.visualstudio.code --install-extension jeff-hykin.better-cpp-syntax
 
 # verilog
-code --install-extension mshr-h.veriloghdl
+flatpak run com.visualstudio.code --install-extension mshr-h.veriloghdl
 
 # docker
-code --install-extension ms-azuretools.vscode-docker
+flatpak run com.visualstudio.code --install-extension ms-azuretools.vsflatpak run com.visualstudio.code-docker
 
 # git
-code --install-extension mhutchie.git-graph
+flatpak run com.visualstudio.code --install-extension mhutchie.git-graph
 
 # markdown
-code --install-extension yzhang.markdown-all-in-one
-code --install-extension bierner.markdown-preview-github-styles
-code --install-extension bierner.markdown-shiki
+flatpak run com.visualstudio.code --install-extension yzhang.markdown-all-in-one
+flatpak run com.visualstudio.code --install-extension bierner.markdown-preview-github-styles
+flatpak run com.visualstudio.code --install-extension bierner.markdown-shiki
 
 # themes
-code --install-extension pkief.material-icon-theme
-code --install-extension fabiospampinato.vscode-monokai-night
-# code --install-extension solarliner.linux-themes
+flatpak run com.visualstudio.code --install-extension pkief.material-icon-theme
+flatpak run com.visualstudio.code --install-extension fabiospampinato.vsflatpak run com.visualstudio.code-monokai-night
+# flatpak run com.visualstudio.code --install-extension solarliner.linux-themes
 
-# beautiful code
-code --install-extension esbenp.prettier-vscode
-# code --install-extension CoenraadS.bracket-pair-colorizer
-code --install-extension aaron-bond.better-comments
-code --install-extension visualstudioexptteam.vscodeintellicode
-code --install-extension streetsidesoftware.code-spell-checker
+# beautiful flatpak run com.visualstudio.code
+flatpak run com.visualstudio.code --install-extension esbenp.prettier-vsflatpak run com.visualstudio.code
+# flatpak run com.visualstudio.code --install-extension CoenraadS.bracket-pair-colorizer
+flatpak run com.visualstudio.code --install-extension aaron-bond.better-comments
+flatpak run com.visualstudio.code --install-extension visualstudioexptteam.vsflatpak run com.visualstudio.codeintelliflatpak run com.visualstudio.code
+flatpak run com.visualstudio.code --install-extension streetsidesoftware.flatpak run com.visualstudio.code-spell-checker
 
 # others
-code --install-extension ms-vscode-remote.remote-ssh
-code --install-extension redhat.vscode-xml
-code --install-extension redhat.vscode-yaml
+flatpak run com.visualstudio.code --install-extension ms-vsflatpak run com.visualstudio.code-remote.remote-ssh
+flatpak run com.visualstudio.code --install-extension redhat.vsflatpak run com.visualstudio.code-xml
+flatpak run com.visualstudio.code --install-extension redhat.vsflatpak run com.visualstudio.code-yaml
 
 # list all installed extensions
 echo -e "\t Listing all currently installed extensions"
-code --list-extensions
+flatpak run com.visualstudio.code --list-extensions

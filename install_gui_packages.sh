@@ -5,125 +5,98 @@ YELLOW='\e[33m'
 GREEN='\e[32m'
 NC='\e[0m'
 
-# ----------------------------- Text editors / IDEs
+
+# ==================== install using Flatpak
+echo -e "${YELLOW} install using Flatpak ${NC}"
+
+# add remote repo flatpak
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+# list all flatpak packages installed
+flatpak list --app
+
+# uninstall unecessary apps
+flatpak uninstall --delete-data -y org.kde.kmahjongg
+flatpak uninstall --delete-data -y org.kde.kmines
+flatpak uninstall --delete-data -y org.kde.kolourpaint
+flatpak uninstall --delete-data -y org.kde.qrca
+
 echo -e "${YELLOW} Text editors / IDEs ${NC}"
-# install vscode
-# sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-# sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
-# dnf check-update
-# sudo dnf install -y code
-# source install_vscode_extensions.sh
 
-# install vscodium
-sudo rpmkeys --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
-printf "[gitlab.com_paulcarroty_vscodium_repo]\nname=download.vscodium.com\nbaseurl=https://download.vscodium.com/rpms/\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg\nmetadata_expire=1h\n" | sudo tee -a /etc/yum.repos.d/vscodium.repo
-sudo dnf install -y codium
+# flatpak install flathub -y com.visualstudio.code
+# source ./install_vscode_extensions.sh
 
-# sudo dnf install -y texmaker
-sudo dnf install -y meld
+flatpak install flathub -y com.vscodium.codium
+source ./install_vscodium_extensions.sh
 
-# ----------------------------- PDF readers
-echo -e "${YELLOW} PDF readers ${NC}"
-sudo dnf install -y zathura zathura-pdf-mupdf zathura-cb zathura-djvu zathura-ps
-sudo dnf install -y xreader
-# sudo dnf install -y okular
+flatpak install flathub -y org.gnome.meld
+flatpak install flathub -y net.cozic.joplin_desktop
+flatpak install flathub io.github.nokse22.asciidraw
+flatpak install flathub -y com.jgraph.drawio.desktop
 
-# ----------------------------- Email and chat clients
 echo -e "${YELLOW} Email and chat clients ${NC}"
-# sudo dnf install -y steam
-sudo dnf install -y discord
-# install zoom
-wget -P ~/Downloads https://zoom.us/client/5.15.2.4260/zoom_x86_64.rpm
-sudo dnf install -y ~/Downloads/zoom_x86_64.rpm
-# install slack
-# wget -P ~/Downloads https://downloads.slack-edge.com/releases/linux/4.32.127/prod/x64/slack-4.32.127-0.1.el8.x86_64.rpm
-# sudo dnf install -y ~/Downloads/slack-4.32.127-0.1.el8.x86_64.rpm
-# install thunderbird
-sudo dnf install -y thunderbird
+flatpak install flathub -y org.mozilla.thunderbird
+flatpak install flathub -y com.discordapp.Discord
+flatpak install flathub us.zoom.Zoom
+flatpak install flathub -y com.ktechpit.whatsie
 
-# ----------------------------- File managers
+echo -e "${YELLOW} PDF readers ${NC}"
+flatpak install flathub -y org.pwmt.zathura
+# flatpak install flathub -y org.kde.okular
+
 echo -e "${YELLOW} File managers ${NC}"
-# install nemo
 sudo dnf install -y nemo
-cp -rv nemo.desktop ~/.local/share/applications
 
-# ----------------------------- Remote desktop viewers
-echo -e "${YELLOW} Remote desktop viewers ${NC}"
-sudo dnf install -y putty
-# sudo dnf install -y x2goclient cups-x2go      # only X11 compatible
-# install remmina
-sudo dnf copr enable hubbitus/remmina-next
-sudo dnf upgrade --refresh 'remmina*' 'freerdp*'
-sudo dnf install -y remmina
-# install vnc viewer
-wget -P ~/Downloads https://downloads.realvnc.com/download/file/viewer.files/VNC-Viewer-7.5.1-Linux-x64.rpm
-sudo dnf install -y ~/Downloads/VNC-Viewer-7.5.1-Linux-x64.rpm
-
-# ----------------------------- Torrent clients
 echo -e "${YELLOW} Torrent clients ${NC}"
-# sudo dnf install -y qbittorrent
+flatpak install flathub -y org.qbittorrent.qBittorrent
 
-# ----------------------------- Virtual Emulators
 echo -e "${YELLOW} Virtual Emulators ${NC}"
 sudo dnf install -y qemu
 sudo dnf install -y virt-manager
+# check if daemon is running
+sudo systemctl status virtqemud
+# enable and start it
+sudo systemctl enable --now virtqemud.socket
+sudo systemctl enable --now virtqemud
+# install full virtualization stack
+sudo dnf install @virtualization
+# confirm if socket exists
+ls -la /var/run/libvirt/virtqemud-sock
+# add yourself to libvirt group
+sudo usermod -aG libvirt $(whoami)
 
-# ----------------------------- Web browsers
+echo -e "${YELLOW} Games ${NC}"
+flatpak install flathub -y com.valvesoftware.Steam
+
 echo -e "${YELLOW} Web browsers ${NC}"
-sudo dnf install -y chromium
+flatpak install flathub -y app.zen_browser.zen
+# flatpak install flathub -y io.gitlab.librewolf-community
+# sudo dnf install -y chromium
 
-# install librewolf
-curl -fsSL https://repo.librewolf.net/librewolf.repo | pkexec tee /etc/yum.repos.d/librewolf.repo
-sudo dnf install -y librewolf
+echo -e "${YELLOW} Media ${NC}"
+flatpak install flathub -y com.spotify.Client
+flatpak install flathub -y org.videolan.VLC
 
-# ----------------------------- Cloud storage
 echo -e "${YELLOW} Cloud storage ${NC}"
 # install dropbox
 # wget -P ~/Downloads https://linux.dropbox.com/packages/fedora/nautilus-dropbox-2022.12.05-1.fedora.x86_64.rpm
 # sudo dnf install -y ~/Downloads/nautilus-dropbox-2022.12.05-1.fedora.x86_64.rpm
 
-# ----------------------------- Others
 echo -e "${YELLOW} Others ${NC}"
-sudo dnf install -y gtkwave
+flatpak install flathub -y io.github.redddfoxxyy.samaya
+flatpak install flathub -y org.kde.isoimagewriter
+flatpak install flathub -y org.kde.ktouch
+flatpak install flathub org.kde.kgraphviewer
+
 # install balena etcher
 wget -P ~/Downloads https://github.com/balena-io/etcher/releases/download/v1.18.8/balena-etcher-1.18.8.x86_64.rpm
 sudo dnf install -y ~/Downloads/balena-etcher-1.18.8.x86_64.rpm
 # install key pass XC
-sudo dnf install -y keepassxc
-# install joplin
-wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash
-
-# ----------------------------- Media
-echo -e "${YELLOW} Media ${NC}"
-sudo dnf install -y vlc
+# sudo dnf install -y keepassxc
 
 
-
-
-# ==================== Install using Flatpak
-echo -e "${YELLOW} Install using Flatpak ${NC}"
-
-# install flatpak
-sudo dnf install flatpak
-
-# add remote repo flatpak
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
-# install spotify
-sudo flatpak install flathub -y com.spotify.Client
-# install spotube
-# sudo flatpak install com.github.KRTirtho.Spotube
-# install whatsapp
-sudo flatpak install flathub -y com.github.eneshecan.WhatsAppForLinux
-# install pdf editor
-sudo flatpak install flathub -y com.github.jeromerobert.pdfarranger
-# install bambulab studio
-flatpak install flathub com.bambulab.BambuStudio
-# install zotero
-flatpak install flathub org.zotero.Zotero
-# install drawio
-flatpak install flathub com.jgraph.drawio.desktop
 
 # list all flatpak packages installed
-flatpak list
-
+flatpak list --app
+# uninstall unused packages
+flatpak uninstall --unused
