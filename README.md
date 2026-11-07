@@ -33,27 +33,27 @@ This repo is a guide to how I setup my desktop machine using Fedora with the Swa
 of choice. I use Fedora mostly for hardware and software development. If you're migrating to Linux
 for the first time and don't know where to start this is the place to be.
 
-## 1. Download and Install Fedora
-1. Download Fedora Sway Spin from the following [link](https://fedoraproject.org/spins/sway).
+## Download and Install Fedora
+1. Download Fedora KDE Plasme Desktop from the following [link](https://fedoraproject.org/kde/).
 2. Create a bootable USB using [balena etcher](https://etcher.balena.io).
 3. Insert it into your PC, load the boot menu and follow the instructions to install Fedora on your local machine.
 
-## 2. First things to do post installation
+## First things to do post installation
 - Once Fedora is installed successfully we need to setup the following.
 
-### 2.1 Connect to your local work/home WiFi
-- Since no graphical utilities are currently installed we will be using the terminal. To connect to
-  your local WiFi run the following commands.
+<!-- ### 2.1 Connect to your local work/home WiFi -->
+<!-- - Since no graphical utilities are currently installed we will be using the terminal. To connect to -->
+<!--   your local WiFi run the following commands. -->
+<!---->
+<!-- ```bash -->
+<!-- # list all available WiFi networks -->
+<!-- nmcli device wifi list -->
+<!---->
+<!-- # connect to your WiFi network -->
+<!-- nmcli device wifi connect "SSID" password "your_password" -->
+<!-- ``` -->
 
-```bash
-# list all available WiFi networks
-nmcli device wifi list
-
-# connect to your WiFi network
-nmcli device wifi connect "SSID" password "your_password"
-```
-
-### 2.2 Install `git`
+### Install `git`
 - Install git: `sudo dnf install -y git`
 - Clone this [fedora_setup](https://github.com/usman1515/Fedora_Setup#) repo in the $HOME directory.
     ```bash
@@ -61,20 +61,24 @@ nmcli device wifi connect "SSID" password "your_password"
     git clone https://github.com/usman1515/Fedora_Setup.git fedora_setup
     ```
 
-### 2.2 Setup `dnf` configuration
+### Setup `dnf` configuration
 - [Reference](https://dnf.readthedocs.io/en/latest/conf_ref.html)
 - Open the file: `sudo vi /etc/dnf/dnf.conf`
 - Add the following lines:
     ```bash
     # added for speed
     fastestmirror=True
-    max_parallel_downloads=5
+    max_parallel_downloads=20
     defaultyes=True
     keepcache=False
     ```
 
-### 2.3 Update the system
+### Update the system
 - Update the system: `sudo dnf update`
+```bash
+sudo dnf upgrade --refresh
+sudo dnf upgrade
+```
 - Run the script `post_installation.sh`. This will do the following:
     - enable rpm fusion
     - enable flathub
@@ -82,9 +86,9 @@ nmcli device wifi connect "SSID" password "your_password"
     - install preload
     - enable 3rd party repositories
 
-## 3. Setup the Terminal
+## Setup the Terminal
 
-### 3.1 Clone the dotfiles repository.
+### Clone the dotfiles repository.
 - Clone this [dotfiles](https://github.com/usman1515/dotfiles) repo.
     ```bash
     cd ~
@@ -92,13 +96,17 @@ nmcli device wifi connect "SSID" password "your_password"
     ```
 - Copy the git config from the dotfiles repo into the `$HOME` dir.
 
-### 3.2 Install Nerd Fonts
-- Install [Nerd Fonts](https://www.nerdfonts.com/font-downloads)
+### Install Nerd Fonts
+- You can dowload multiple [Nerd Fonts](https://www.nerdfonts.com/font-downloads) of your choice.
+However my personal favourites are
+    - CascadiaCode
+    - FiraCode
+    - JetBrainsMono
     ```bash
-    source install_nerd_fonts.sh
+    source ./install_nerd_fonts.sh
     ```
 
-### 3.3 Install Alacritty
+### Install Alacritty
 - Install alacritty
     ```bash
     sudo dnf install -y alacritty
@@ -109,29 +117,30 @@ nmcli device wifi connect "SSID" password "your_password"
     git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
     ```
 
-### 3.4 Install Kitty
+### Install Kitty
 - Install kitty
     ```bash
     sudo dnf install -y kitty
     ```
 - Copy the kitty config folder from the dotfiles repo into `~/.config` folder.
 
-### 3.5 Install Tmux
+### Install Tmux
 - Install kitty
     ```bash
     sudo dnf install -y tmux
     ```
 - Copy the tmux config folder from the dotfiles repo into `~/.config` folder.
 
-### 3.6 Install NeoVim
-- Install neovim
+### Install NeoVim
+- Install neovim. Note that the config might not work out of the box since LSP andn plugins in
+neovim are always being updated.
     ```bash
     sudo dnf install -y neovim
     ```
 - Refer to these [instructions](https://github.com/usman1515/dotfiles/tree/main/nvim) on how to setup neovim.
 - Copy the nvim config folder from the dotfiles repo into `~/.config` folder.
 
-### 3.7 Install and customize ZSH
+### Install and customize ZSH
 - Install oh my zsh for ZSH shell.
     ```bash
     source install_oh_my_zsh.sh
@@ -140,41 +149,33 @@ nmcli device wifi connect "SSID" password "your_password"
     ```
 - Reboot PC.
 
-### 3.8 (Optional) Install and customize Oh my Posh
+### (Optional) Install and customize Oh my Posh
 - Install oh my posh for BASH shell.
     ```bash
     source install_oh_my_posh.sh
     ```
 
-## 4. Install Compilers
+## Install Compilers
 - [Languages & databases](https://developer.fedoraproject.org/tech.html)
     ```bash
     source install_compilers.sh
     ```
 
-## 5. Install CLI based tools
+## Install CLI based tools
 - To install all the CLI and TUI based applications run the following command.
     ```bash
     source install_cli_packages.sh
     ```
 
-## 6. Install GUI based applications
-- To install all the GUI and RPM based applications run the following command.
+## Install GUI based applications
+- To install all the GUI and Flathub based applications run the following command.
     ```bash
     source install_gui_packages.sh
     ```
 
-## 7. Install Gtklp for remote printers
-- To setup remote printers on your network that use GNU GTKLP GUI run the following script.
-    ```bash
-    source install_printers.sh
-    ```
+## Install FOSS toolchains for Hardware development
+**OPTIONAL**: These are some of the tools that I use for hardware development.
 
-## 8. Setup SSH
--   Run the script `setup_ssh.sh` to generate SSH key.
-    ```bash
-    source ./setup_ssh.sh
-    ```
 
 ## 9. Install FOSS toolchains for Hardware development
 **OPTIONAL**: These are some of the tools that I use for hardware development.
