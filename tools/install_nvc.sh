@@ -6,7 +6,7 @@ cd ~/Tools
 
 # install dependencies
 sudo dnf install -y autoconf automake flex check llvm-devel libffi-devel \
-    zlib-ng-compat-devel libzstd-devel elfutils-devel 
+    zlib-ng-compat-devel libzstd-devel elfutils-devel
 
 # clone nvc repo
 git clone https://github.com/nickg/nvc.git
@@ -16,7 +16,7 @@ cd nvc
 ./autogen.sh
 
 # create separate build dir
-[ -d build ] || mkdir -p build
+mkdir -p build
 cd build
 
 # build and install using the standard autotools steps
