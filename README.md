@@ -209,8 +209,14 @@ nextpnr-ice40 --version
 nextpnr-ecp5 --version
 openFPGALoader --version
 ```
+
+### Install [NVC](https://github.com/nickg/nvc)
+NVC is an open-source **VHDL compiler and simulator**. It is used in this project for VHDL
+simulation and is separate from the OSS CAD Suite.
+```bash
+source install_nvc.sh
 ```
-- Download the [latest nightly release](https://github.com/YosysHQ/oss-cad-suite-build/releases).
+
 ```bash
 # download archive and move here
 wget https://github.com/YosysHQ/oss-cad-suite-build/releases/download/<release-date>/oss-cad-suite-linux-arm64- <release-date>.tgz
