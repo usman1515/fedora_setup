@@ -176,17 +176,39 @@ neovim are always being updated.
 ## Install FOSS toolchains for Hardware development
 **OPTIONAL**: These are some of the tools that I use for hardware development.
 
+### Install [OSS CAD Suite](https://github.com/YosysHQ/oss-cad-suite-build)
+The OSS CAD Suite is a collection of open-source tools for digital design and FPGA development. A
+binary software distribution for a number of open source software used in digital logic design.
 
-## 9. Install FOSS toolchains for Hardware development
-**OPTIONAL**: These are some of the tools that I use for hardware development.
+- Download the latest Linux x86-64 release from
+[here](https://github.com/YosysHQ/oss-cad-suite-build/releases). For a normal x86-64 Fedora, select
+the `linux-x64` archive.
 
-### 9.1 Install [OSS CAD Suite](https://github.com/YosysHQ/oss-cad-suite-build)
-- A binary software distribution for a number of open source software used in digital logic design.
-  Comes with a ton of already pre build FOSS EDA tools.
+- Download the latest build and extract it in `~/Tools/`:
 ```bash
-# create dir Tools if it doesnt exist
-[ -d ~/Tools ] || mkdir -p ~/Tools
+mkdir -p ~/Tools
 cd ~/Tools
+
+tar -zxvf ~/Downloads/oss-cad-suite-linux-x64-<build-date>.tgz \
+    -C ~/Tools/oss-cad-suite-linux-x64-<build-date>
+
+# Add the following `$PATH` in your `~/.bash_aliases` or `~/.zsh_aliases`
+# PATH oss-cad-suite
+export PATH="$HOME/Tools/oss-cad-suite-linux-x64-<build-date>/bin:$PATH"
+
+# restart the shell or run:
+source ~/.bashrc
+source ~/.zshrc
+
+# verify the installation:
+ghdl --version
+iverilog --version
+verilator --version
+yosys --version
+nextpnr-ice40 --version
+nextpnr-ecp5 --version
+openFPGALoader --version
+```
 ```
 - Download the [latest nightly release](https://github.com/YosysHQ/oss-cad-suite-build/releases).
 ```bash
